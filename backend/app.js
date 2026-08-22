@@ -14,7 +14,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Allow requests from the frontend URL
+  credentials: true, // Allow cookies to be sent with requests
+}));
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/', authRoutes2);
